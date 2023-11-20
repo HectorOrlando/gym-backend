@@ -18,3 +18,12 @@ userRouter.get("/users", async (req: Request, res: Response, next: NextFunction)
     }
 });
 
+userRouter.get("/users/:id", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await userController.getUserById(req.params.id);
+        return res.json({ user });
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});
+

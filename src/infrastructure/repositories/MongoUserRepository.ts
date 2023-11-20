@@ -1,7 +1,7 @@
 // MongoUserRepository.ts
 
 // Importa las interfaces y tipos necesarios de MongoDB y la función de conexión a la base de datos
-import { Collection, WithId, Document } from "mongodb";
+import { Collection, WithId, Document, ObjectId } from "mongodb";
 import { dbConnection } from "../mongodb/connections/Connection";
 
 // Importa la interfaz UserRepository desde el dominio
@@ -12,7 +12,7 @@ export class MongoUserRepository implements UserRepository {
     // Propiedad privada que representa la colección de usuarios en la base de datos
     private collection?: Collection;
 
-    constructor() { this.connect();}
+    constructor() { this.connect(); }
 
     //  Establece la conexión con la base de datos.
     private async connect(): Promise<void> {
@@ -32,5 +32,15 @@ export class MongoUserRepository implements UserRepository {
             throw new Error("Error getting users list");
         }
     }
-    
+
+    async findUserById(id: string): Promise<WithId<Document>> {
+        try {
+            const idUser = { _id: new ObjectId(id) }
+            const userDoc = await this.collection!.findOne(idUser);
+            return userDoc!;
+        } catch (error) {
+            throw new Error("Error gettin user.");
+        }
+    }
+
 }
