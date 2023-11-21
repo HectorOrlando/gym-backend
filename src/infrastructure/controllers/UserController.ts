@@ -2,7 +2,7 @@
 
 import { Request } from "express";
 
-import { FindAllUsers, FindUserById, CreateUser, UpdateUserById } from "../../application/user-use-cases";
+import { FindAllUsers, FindUserById, CreateUser, UpdateUserById, DeleteUserById } from "../../application/user-use-cases";
 
 // Clase que representa el controlador de usuarios
 export class UserController {
@@ -11,7 +11,8 @@ export class UserController {
         public findAllUsers: FindAllUsers,
         public findUserById: FindUserById,
         public createUser: CreateUser,
-        public updateUserById: UpdateUserById
+        public updateUserById: UpdateUserById,
+        public deleteUserById: DeleteUserById
     ) { }
 
     // Controlador para obtener todos los usuarios.
@@ -34,5 +35,9 @@ export class UserController {
         const id = req.params.id;
         const userData = req.body;
         await this.updateUserById.run(id, userData);
+    }
+
+    async removeUserById(id: string) {
+        await this.deleteUserById.run(id);
     }
 }

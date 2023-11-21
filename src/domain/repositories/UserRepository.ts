@@ -9,4 +9,5 @@ export interface UserRepository {
     findUserById(id: string): Promise<WithId<Document>>;
     createUser(user: UserModel): Promise<void>;
     updateUserById(id: string, user: UserModel): Promise<void>;
+    deleteUserById(id: string): Promise<void>;
 }

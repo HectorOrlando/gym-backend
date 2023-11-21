@@ -60,4 +60,13 @@ export class MongoUserRepository implements UserRepository {
             throw new Error("Error update user.");
         }
     }
+
+    async deleteUserById(id: string): Promise<void> {
+        try {
+            const idUser = { _id: new ObjectId(id) }
+            await this.collection!.deleteOne(idUser);
+        } catch (error) {
+            throw new Error("Error delete user.");
+        }
+    }
 }

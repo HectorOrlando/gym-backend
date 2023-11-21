@@ -39,10 +39,19 @@ userRouter.post("/user", userValidationMiddleware, async (req: Request, res: Res
     }
 });
 
-userRouter.put("/user/:id", async (req: Request, res: Response, next: NextFunction) => {
+userRouter.put("/user/:id", userValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
     try {
         await userController.putUserById(req);
         res.status(204).header('X-Message', 'User update successfully').end();
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});
+
+userRouter.delete("/user/:id", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await userController.removeUserById(req.params.id);
+        res.status(204).header('X-Message', 'User deleted successfully').end();
     } catch (error) {
         ErrorHandler.handleError(error, req, res, next);
     }
