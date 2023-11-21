@@ -37,4 +37,13 @@ userRouter.post("/user", userValidationMiddleware, async (req: Request, res: Res
     } catch (error) {
         ErrorHandler.handleError(error, req, res, next);
     }
-}); 
+});
+
+userRouter.put("/user/:id", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await userController.putUserById(req);
+        res.status(204).header('X-Message', 'User update successfully').end();
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});

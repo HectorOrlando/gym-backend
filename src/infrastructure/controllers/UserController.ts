@@ -2,7 +2,7 @@
 
 import { Request } from "express";
 
-import { FindAllUsers, FindUserById, CreateUser } from "../../application/user-use-cases";
+import { FindAllUsers, FindUserById, CreateUser, UpdateUserById } from "../../application/user-use-cases";
 
 // Clase que representa el controlador de usuarios
 export class UserController {
@@ -10,7 +10,8 @@ export class UserController {
     constructor(
         public findAllUsers: FindAllUsers,
         public findUserById: FindUserById,
-        public createUser: CreateUser
+        public createUser: CreateUser,
+        public updateUserById: UpdateUserById
     ) { }
 
     // Controlador para obtener todos los usuarios.
@@ -27,5 +28,11 @@ export class UserController {
     async insertUser(req: Request) {
         const userData = req.body;
         await this.createUser.run(userData);
+    }
+
+    async putUserById(req: Request) {
+        const id = req.params.id;
+        const userData = req.body;
+        await this.updateUserById.run(id, userData);
     }
 }

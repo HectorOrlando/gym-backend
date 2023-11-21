@@ -51,4 +51,13 @@ export class MongoUserRepository implements UserRepository {
             throw new Error("Error insert user.");
         }
     }
+
+    async updateUserById(id: string, user: UserModel): Promise<void> {
+        try {
+            const idUser = { _id: new ObjectId(id) }
+            await this.collection!.updateOne(idUser, { $set: user });
+        } catch (error) {
+            throw new Error("Error update user.");
+        }
+    }
 }
