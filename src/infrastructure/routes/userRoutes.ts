@@ -1,8 +1,11 @@
 // userRouter.ts
 
 import express, { NextFunction, Request, Response } from "express";
+
 import { userController } from '../dependency-injection/userDependencies';
+
 import { ErrorHandler } from "../error/ErrorHandler";
+import { userValidationMiddleware } from "../middlewares/userMiddlewares";
 
 // Creamos el enrutador para la entidad 'usuarios'
 export const userRouter = express.Router();
@@ -27,3 +30,11 @@ userRouter.get("/users/:id", async (req: Request, res: Response, next: NextFunct
     }
 });
 
+userRouter.post("/user", userValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await userController.insertUser(req);
+        res.status(201).send('User create successfully').end();
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+}); 

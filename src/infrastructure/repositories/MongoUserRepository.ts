@@ -4,7 +4,8 @@
 import { Collection, WithId, Document, ObjectId } from "mongodb";
 import { dbConnection } from "../mongodb/connections/Connection";
 
-// Importa la interfaz UserRepository desde el dominio
+// Importaciones desde el dominio
+import { UserModel } from "../../domain/models/UserModel";
 import { UserRepository } from "../../domain/repositories/UserRepository";
 
 // Clase que implementa la interfaz UserRepository y se conecta a MongoDB
@@ -43,4 +44,11 @@ export class MongoUserRepository implements UserRepository {
         }
     }
 
+    async createUser(user: UserModel): Promise<void> {
+        try {
+            await this.collection!.insertOne(user);
+        } catch (error) {
+            throw new Error("Error insert user.");
+        }
+    }
 }
