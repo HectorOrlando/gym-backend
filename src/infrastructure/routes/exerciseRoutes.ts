@@ -14,3 +14,11 @@ exerciseRouter.get('/exercises', async (req: Request, res: Response, next: NextF
     }
 });
 
+exerciseRouter.post('/exercise', exerciseValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await exerciseController.insertExercise(req);
+        res.status(201).send('Exercise created successfully').end();
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});

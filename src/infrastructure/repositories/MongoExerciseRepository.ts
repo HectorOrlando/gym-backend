@@ -24,4 +24,12 @@ export class MongoExerciseRepository implements ExerciseRepository {
         }
     }
 
+    async createExercise(exercise: ExerciseModel): Promise<void> {
+        try {
+            await this.collection!.insertOne(exercise);
+        } catch (error) {
+            throw new Error("Error create exercise list.");
+        }
+    }
+
 }
