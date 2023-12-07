@@ -6,7 +6,7 @@ Pasos para arrancar un proyecto clonado desde GitHub:
 1. **Clonar el repositorio:**
 
    ```bash
-   git clone git@github.com:HectorOrlando/skeleton-api-rest-full.git
+   git@github.com:HectorOrlando/gym-backend.git
    ```
 
    
@@ -14,7 +14,7 @@ Pasos para arrancar un proyecto clonado desde GitHub:
 2. **Navegar al directorio del proyecto:**
 
    ```bash
-   cd skeleton-api-rest-full
+   cd gym-backend
    ```
 
 3. **Instalar dependencias:**
