@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { userRouter } from '../routes/userRoutes';
+import { exerciseRouter } from '../routes/exerciseRoutes';
 import { ErrorHandler } from '../error/ErrorHandler';
 
 dotenv.config();    // Carga las variables de entorno desde .env
@@ -34,6 +35,7 @@ export class Server {
     // Método para configurar las rutas de la aplicación
     routes() {
         this.app.use(this.usersRoutePath, userRouter);  // Configurar las rutas en la aplicación Express
+        this.app.use(this.usersRoutePath, exerciseRouter);
     }
 
     // Método para iniciar el servidor y escuchar en el puerto configurado
