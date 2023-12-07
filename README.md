@@ -1,4 +1,4 @@
-# skeleton-api-rest-full
+# Gym-Backend
 
 
 Pasos para arrancar un proyecto clonado desde GitHub:
