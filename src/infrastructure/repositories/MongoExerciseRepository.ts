@@ -32,4 +32,14 @@ export class MongoExerciseRepository implements ExerciseRepository {
         }
     }
 
+    async updateExerciseById(id: string, exercise: ExerciseModel): Promise<void> {
+
+        try {
+            const exerciseId = { _id: new ObjectId(id) };
+            await this.collection!.updateOne(exerciseId, { $set: exercise });
+        } catch (error) {
+            throw new Error("Error update exercise list.");
+        }
+    }
+
 }
