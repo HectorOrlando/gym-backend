@@ -4,15 +4,15 @@ import { WithId, Document } from "mongodb";
 import { FindAllExercises } from '../../application/exercise-use-cases/FindAllExercises';
 import { CreateExercise } from "../../application/exercise-use-cases/CreateExercise";
 import { UpdateExerciseById } from "../../application/exercise-use-cases/UpdateExerciseById";
+import { DeleteExerciseById } from '../../application/exercise-use-cases/DeleteExerciseById';
 import { ExerciseModel } from "../../domain/models/ExerciseModel";
-
 
 export class ExerciseController {
     constructor(
         public findAllExercises: FindAllExercises,
         public createExercise: CreateExercise,
-        public updateExerciseById: UpdateExerciseById
-
+        public updateExerciseById: UpdateExerciseById,
+        public deleteExerciseById: DeleteExerciseById
     ) { }
 
     async getAllExercises(): Promise<WithId<Document>[]> {
@@ -35,6 +35,14 @@ export class ExerciseController {
     async putExerciseById(id: string, exercise: ExerciseModel): Promise<void> {
         try {
             await this.updateExerciseById.run(id, exercise);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async removeExerciseById(id: string): Promise<void> {
+        try {
+            await this.deleteExerciseById.run(id);
         } catch (error) {
             throw error;
         }

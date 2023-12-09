@@ -5,4 +5,5 @@ export interface ExerciseRepository {
     findAllExercises(): Promise<WithId<Document>[]>;
     createExercise(exercise: ExerciseModel): Promise<void>;
     updateExerciseById(id: string, exercise: ExerciseModel): Promise<void>;
+    deleteExerciseById(id: string): Promise<void>;
 }

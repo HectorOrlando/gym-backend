@@ -31,3 +31,12 @@ exerciseRouter.put('/exercise/:id', exerciseValidationMiddleware, async (req: Re
         ErrorHandler.handleError(error, req, res, next);
     }
 });
+
+exerciseRouter.delete('/exercise/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await exerciseController.removeExerciseById(req.params.id);
+        res.status(204).header('X-Message', 'Exercise deleted successfully').end();
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});

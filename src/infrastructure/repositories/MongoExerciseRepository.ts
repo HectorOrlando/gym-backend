@@ -42,4 +42,13 @@ export class MongoExerciseRepository implements ExerciseRepository {
         }
     }
 
+    async deleteExerciseById(id: string): Promise<void> {
+        try {
+            const exerciseId = { _id: new ObjectId(id) }
+            await this.collection!.deleteOne(exerciseId);
+        } catch (error) {
+            throw new Error("Error delete exercise list.");
+        }
+    }
+
 }
