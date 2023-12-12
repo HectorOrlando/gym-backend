@@ -1,0 +1,44 @@
+[
+  {
+    "_id": {
+      "$oid": "648cd5bf90a9f7b6ea9fd001"
+    },
+    "name": "user uno",
+    "email": "email-1-@email.com"
+  },
+  {
+    "_id": {
+      "$oid": "648cd5bf90a9f7b6ea9fd002"
+    },
+    "name": "user dos",
+    "email": "email-2-@email.com"
+  },
+  {
+    "_id": {
+      "$oid": "648cd5bf90a9f7b6ea9fd003"
+    },
+    "name": "user tres",
+    "email": "email-3-@email.com"
+  },
+  {
+    "_id": {
+      "$oid": "648cd5bf90a9f7b6ea9fd004"
+    },
+    "name": "user cuatro",
+    "email": "email-4-@email.com"
+  },
+  {
+    "_id": {
+      "$oid": "648cd5bf90a9f7b6ea9fd005"
+    },
+    "name": "user cinco",
+    "email": "email-5-@email.com"
+  },
+  {
+    "_id": {
+      "$oid": "64b67ee973acfae3b21bc006"
+    },
+    "name": "user seis",
+    "email": "email-6-@email.com"
+  }
+]

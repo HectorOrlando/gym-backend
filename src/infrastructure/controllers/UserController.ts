@@ -4,6 +4,11 @@ import { Request } from "express";
 
 import { FindAllUsers, FindUserById, CreateUser, UpdateUserById, DeleteUserById } from "../../application/user-use-cases";
 
+type CreateUserRequest = {
+    name: string;
+    email: string;
+}
+
 // Clase que representa el controlador de usuarios
 export class UserController {
     // Constructor que recibe una instancia de FindAllUsers como parámetro

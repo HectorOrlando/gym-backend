@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "3bcbfe86-4c63-43a0-9ba0-8e41c40f8599",
+		"name": "Gym Rest Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27149440",
+		"_collection_link": "https://universal-equinox-284055.postman.co/workspace/Team-Workspace~236f65b9-db6e-4bd6-8357-2ce6cbbe0a37/collection/27149440-3bcbfe86-4c63-43a0-9ba0-8e41c40f8599?action=share&creator=27149440&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "FindAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/users/648cd5bf90a9f7b6ea9fd2f3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"users",
+								"648cd5bf90a9f7b6ea9fd2f3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUserById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/users/64c144060bd7a6ab7e69fad8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"users",
+								"64c144060bd7a6ab7e69fad8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"name\": \"user 7 modificado\",\r\n            \"email\": \"email-7-modificado-@email.com\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gym/users/64c54d63d0e8edf43e2dade3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"users",
+								"64c54d63d0e8edf43e2dade3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"name\": \"user 7\",\r\n            \"email\": \"email-7-@email.com\"\r\n        }\r\n       ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gym/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exercises",
+			"item": [
+				{
+					"name": "CreateExercise",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"name\": \"test\",\r\n    \"typeOfExercise\": \"test (calentamiento)\",\r\n    \"series\": 3,\r\n    \"repetitions\": \"15-15-12\",\r\n    \"rest\": 1,\r\n    \"weight\": 45\r\n  }\r\n       ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gym/exercises",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exercises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FinAllExercise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/exercises",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exercises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FinAllExerciseById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/exercises/64c7702d25a4de1983a6eaf5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exercises",
+								"64c7702d25a4de1983a6eaf5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteExerciseById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/exercises/64c81cb994f794436139fb6c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exercises",
+								"64c81cb994f794436139fb6c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateExerciseById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"name\": \"test modificado ******\",\r\n    \"typeOfExercise\": \"test (calentamiento)\",\r\n    \"series\": 3,\r\n    \"repetitions\": \"15-15-12\",\r\n    \"rest\": 1,\r\n    \"weight\": 45\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gym/exercises/64c82321b38e03748d0bb7d2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exercises",
+								"64c82321b38e03748d0bb7d2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exerciseLog",
+			"item": [
+				{
+					"name": "CreateExerciseLog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"userId\":\"648cd5bf90a9f7b6ea9fd003\",\r\n   \"exerciseId\":\"64c7702d25a4de1983a6eafe\",\r\n   \"date\": \"02/08/2023\",\r\n   \"weight\": 20\r\n}\r\n\r\n// ****  Trazas de prueba  ****\r\n// día espalda      64c7702d25a4de1983a6eaf7\r\n// día deltoides:   64c7702d25a4de1983a6eafe\r\n// día piernas:     64c7702d25a4de1983a6eb04\r\n// día pectoral:    64c7702d25a4de1983a6eb14\r\n// día pectoral:    64c7702d25a4de1983a6eb13\r\n//\r\n// usuario 1:  648cd5bf90a9f7b6ea9fd001\r\n// usuario 2:  648cd5bf90a9f7b6ea9fd002\r\n// usuario 3:  648cd5bf90a9f7b6ea9fd003\r\n// usuario 4:  648cd5bf90a9f7b6ea9fd004\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gym/exerciseLog",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exerciseLog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllExerciseLogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/exerciseLog",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exerciseLog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindExerciseLogById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/gym/exerciseLog/64d08f68c9cf9eaa5fc2234d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gym",
+								"exerciseLog",
+								"64d08f68c9cf9eaa5fc2234d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
