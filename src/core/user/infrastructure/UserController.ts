@@ -1,7 +1,7 @@
 // src\core\user\infrastructure\UserController.ts
 
 import { WithId, Document } from "mongodb";
-import { UserDelete, UserRegister, UserFindAll } from "../application";
+import { UserDelete, UserRegister, UserFindAll, UserFindById } from "../application";
 import { User } from "../domain/User";
 
 
@@ -26,8 +26,9 @@ export class UserController {
     // Constructor que recibe una instancia de FindAllUsers como parámetro
     constructor(
         public register: UserRegister,
-        public findAll: UserFindAll,
         public deleteUser: UserDelete,
+        public findAll: UserFindAll,
+        public findById: UserFindById
     ) { }
 
     async registerUser(request: RegisterUserRequest): Promise<void> {
@@ -35,8 +36,12 @@ export class UserController {
         await this.register.run(user);
     }
 
+    async userDelete(id: string): Promise<void> {
+        await this.deleteUser.run(id);
+    }
+
     async findAllUsers(): Promise<UserResponse[]> {
-        const users =  await this.findAll.run();
+        const users = await this.findAll.run();
 
         return users.map(user => {
             return {
@@ -47,13 +52,22 @@ export class UserController {
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt,
                 isDeleted: user.isDeleted,
-                
             }
         })
     }
 
-    async userDelete(id: string): Promise<void> {
-        await this.deleteUser.run(id);
+    async findByIdUser(id: string): Promise<UserResponse> {
+        const user = await this.findById.run(id);
+
+        return {
+            id: user.id.value,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+            isDeleted: user.isDeleted,
+        }
     }
 
 }

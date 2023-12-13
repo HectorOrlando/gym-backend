@@ -51,16 +51,16 @@ userRouter.get("/users", async (req: Request, res: Response, next: NextFunction)
     }
 });
 
+userRouter.get("/users/:id", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const users = await userController.findByIdUser(req.params.id);
+        return res.json({ users });
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});
 
 
-// userRouter.post("/user", userValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         await userController.insertUser(req);
-//         res.status(201).send('User create successfully').end();
-//     } catch (error) {
-//         ErrorHandler.handleError(error, req, res, next);
-//     }
-// });
 
 // userRouter.put("/user/:id", userValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
 //     try {

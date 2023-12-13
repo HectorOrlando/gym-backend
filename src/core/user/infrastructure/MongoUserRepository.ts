@@ -100,14 +100,37 @@ export class MongoUserRepository implements UserRepository {
                 { _id },
                 {
                     $set: {
-                        isDeleted: userInstance.isDeleted, 
+                        isDeleted: userInstance.isDeleted,
                         updatedAt: userInstance.updatedAt,
                     }
                 }
             );
 
         } catch (error) {
-            throw new Error("Error delete users list");
+            throw new Error("Error al borrar el usuario.");
+        }
+    }
+
+    async findById(userId: string): Promise<User> {
+        try {
+            const _id = new ObjectId(userId);
+            const user = await this.collection.findOne({ _id });
+            if (!user) {
+                throw new Error('El id de usuario no existe.');
+            }
+
+            return new User(
+                new UserId(user._id.toHexString()),
+                user.name,
+                user.email,
+                user.password,
+                user.createdAt,
+                user.updatedAt,
+                user.isDeleted
+            );
+
+        } catch (error) {
+            throw new Error("Error al buscar el usuario por id.");
         }
     }
 
