@@ -1,6 +1,6 @@
 // src\core\user\application\index.ts
 
-export * from './UserShow';
+export * from './UserFindAll';
 export * from './UserRegister';
 export * from './UserDelete';
 

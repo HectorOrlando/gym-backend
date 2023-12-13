@@ -15,8 +15,8 @@ type UserPrimitives = {
     email: string;
     password: string;
     createdAt: Date;
-    isDeleted: boolean;
     updatedAt: Date | undefined;
+    isDeleted: boolean;
 };
 
 // Clase que implementa la interfaz UserRepository y se conecta a MongoDB
@@ -45,8 +45,8 @@ export class MongoUserRepository implements UserRepository {
                 email: user.email,
                 password: user.password,
                 createdAt: user.createdAt,
+                updatedAt: user.updatedAt,
                 isDeleted: user.isDeleted,
-                updatedAt: user.updatedAt
             };
             // Inserta el usuario en la colección de MongoDB
             await this.collection!.insertOne(userToRegister);
@@ -54,6 +54,31 @@ export class MongoUserRepository implements UserRepository {
             throw new Error("Error insert user.");
         }
     }
+
+    async findAll(): Promise<User[]> {
+        try {
+            const usersFound = await this.collection.find().toArray();
+            
+            return usersFound.map(user => {
+                console.log(user);
+                return new User(
+                    new UserId(user._id.toHexString()),
+                    user.name,
+                    user.email,
+                    user.password,
+                    user.createdAt,
+                    user.updatedAt,
+                    user.isDeleted
+                )
+            });
+
+        } catch (error) {
+            throw new Error("Error findAll users list");
+        }
+    }
+
+}
+
 
     // async show(): Promise<User[]> {
     //     try {
@@ -86,6 +111,3 @@ export class MongoUserRepository implements UserRepository {
     //         throw new Error("Error delete users list");
     //     }
     // }
-
-
-}

@@ -4,8 +4,6 @@ import { User } from "./User";
 
 export interface UserRepository {
     register(user: User): Promise<void>;
-    // show(): Promise<User[]>;
+    findAll(): Promise<User[]>;
     // delete(user: User): Promise<void>;
 }
-
-// Dominio no tiene que saber de infraestructura nada de MongoDB. idMongo, documento de Mongo

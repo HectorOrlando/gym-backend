@@ -18,7 +18,7 @@ type RegisterUserRequest = {
 }
 
 // Ruta para manejar las solicitudes POST a "/user" (registro de usuario)
-userRouter.post("/user", async (req: Request, res: Response, next: NextFunction) => {
+userRouter.post("/users", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const body: RegisterUserRequest = req.body; // Extrae los datos del cuerpo de la solicitud y valida el formato
         const { name, email, password } = body;
@@ -30,7 +30,7 @@ userRouter.post("/user", async (req: Request, res: Response, next: NextFunction)
     }
 });
 
-userRouter.delete("/user/:id", async (req: Request, res: Response, next: NextFunction) => {
+userRouter.delete("/users/:id", async (req: Request, res: Response, next: NextFunction) => {
     try {
         // await userController.removeUserById(req.params.id);
         await userController.userDelete(req.params.id);
@@ -41,15 +41,15 @@ userRouter.delete("/user/:id", async (req: Request, res: Response, next: NextFun
 });
 
 // Definir la ruta GET /users en el enrutador userRouter
-// userRouter.get("/users", async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         // Obtenemos todos los usuarios desde el controlador usando el caso de uso getAllUsers
-//         const users = await userController.showUser();
-//         return res.json({ users });
-//     } catch (error) {
-//         ErrorHandler.handleError(error, req, res, next);
-//     }
-// });
+userRouter.get("/users", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        // Obtenemos todos los usuarios desde el controlador usando el caso de uso getAllUsers
+        const users = await userController.findAllUsers();
+        return res.json({ users });
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});
 
 
 

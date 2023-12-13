@@ -10,18 +10,18 @@ export class User {
     private _email: string;
     private _password: string;
     private readonly _createdAt: Date;
-    private _updatedAt?: Date | undefined;
+    private _updatedAt: Date | undefined;
     private _isDeleted: boolean;
-
-    // Constructor privado
-    private constructor(
+    
+    // Constructor public
+    public constructor(
         id: UserId,
         name: string,
         email: string,
         password: string,
         createdAt: Date,
+        updatedAt: Date | undefined,
         isDeleted: boolean,
-        updatedAt?: Date | undefined
     ) {
         // Inicialización de propiedades
         this._id = id;
@@ -29,8 +29,8 @@ export class User {
         this._email = this.validateEmail(email);
         this._password = this.validatePassword(password);
         this._createdAt = createdAt;
-        this._isDeleted = isDeleted;
         this._updatedAt = updatedAt;
+        this._isDeleted = isDeleted;
     }
 
     // Métodos de obtención (getters) para acceder a propiedades privadas
@@ -120,8 +120,8 @@ export class User {
     public static register(name: string, email: string, password: string): User {
         const id = UserId.random();
         const createdAt = new Date();
-        const isDeleted = false;
         const updateAt = undefined;
-        return new User(id, name, email, password, createdAt, isDeleted, updateAt);
+        const isDeleted = false;
+        return new User(id, name, email, password, createdAt, updateAt, isDeleted);
     }
 }
