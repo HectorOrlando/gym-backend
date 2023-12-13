@@ -134,8 +134,39 @@ export class MongoUserRepository implements UserRepository {
         }
     }
 
+    async update(userId: string, name: string, email: string, password: string): Promise<void> {
+        try {
+            const _id = new ObjectId(userId);
+            const user = await this.collection.findOne({ _id });
+
+            if (!user) {
+                throw new Error('El id de usuario no existe.');
+            }
+
+            const updatedUser: User = new User(
+                new UserId(user._id.toHexString()),
+                name || user.name, // Si name es null o undefined, mantiene el valor existente
+                email || user.email, // Si email es null o undefined, mantiene el valor existente
+                password || user.password,
+                user.createdAt,
+                new Date(), // Actualiza updatedAt con la fecha actual
+                user.isDeleted
+            );
+
+            await this.collection.updateOne(
+                { _id },
+                {
+                    $set: {
+                        name: updatedUser.name,
+                        email: updatedUser.email,
+                        password: updatedUser.password,
+                        updatedAt: updatedUser.updatedAt,
+                    }
+                }
+            );
+
+        } catch (error) {
+            throw new Error("Error al actualizar el usuario por id.");
+        }
+    }
 }
-
-
-
-

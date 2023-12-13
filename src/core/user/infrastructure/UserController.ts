@@ -1,7 +1,7 @@
 // src\core\user\infrastructure\UserController.ts
 
 import { WithId, Document } from "mongodb";
-import { UserDelete, UserRegister, UserFindAll, UserFindById } from "../application";
+import { UserDelete, UserRegister, UserFindAll, UserFindById, UserUpdateById } from "../application";
 import { User } from "../domain/User";
 
 
@@ -28,7 +28,8 @@ export class UserController {
         public register: UserRegister,
         public deleteUser: UserDelete,
         public findAll: UserFindAll,
-        public findById: UserFindById
+        public findById: UserFindById,
+        public update: UserUpdateById
     ) { }
 
     async registerUser(request: RegisterUserRequest): Promise<void> {
@@ -70,4 +71,7 @@ export class UserController {
         }
     }
 
+    async updateByIdUser(userId: string, name: string, email: string, password: string): Promise<void> {
+        await this.update.run(userId, name, email, password);
+    }
 }
