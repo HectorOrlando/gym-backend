@@ -58,9 +58,8 @@ export class MongoUserRepository implements UserRepository {
     async findAll(): Promise<User[]> {
         try {
             const usersFound = await this.collection.find().toArray();
-            
+
             return usersFound.map(user => {
-                console.log(user);
                 return new User(
                     new UserId(user._id.toHexString()),
                     user.name,
@@ -77,37 +76,43 @@ export class MongoUserRepository implements UserRepository {
         }
     }
 
+    async delete(userId: string): Promise<void> {
+        try {
+            const _id = new ObjectId(userId);
+            const user = await this.collection.findOne(_id);
+            if (!user) {
+                throw new Error('El id de usuario no existe');
+            }
+
+            const userInstance = new User(
+                new UserId(user._id.toHexString()),
+                user.name,
+                user.email,
+                user.password,
+                user.createdAt,
+                user.updatedAt,
+                user.isDeleted
+            );
+
+            userInstance.delete();
+
+            await this.collection.updateOne(
+                { _id },
+                {
+                    $set: {
+                        isDeleted: userInstance.isDeleted, 
+                        updatedAt: userInstance.updatedAt,
+                    }
+                }
+            );
+
+        } catch (error) {
+            throw new Error("Error delete users list");
+        }
+    }
+
 }
 
 
-    // async show(): Promise<User[]> {
-    //     try {
-    //         // Aquí viene los datos de la DB
-    //         const usersFound = await this.collection.find().toArray();
 
-    //         // Aquí mapeamos los datos que vienen de mongo a nuestro User de dominio
-    //         return usersFound.map(user => {
-    //             return new User(
-    //                 new UserId(user._id.toHexString()),
-    //                 user.name,
-    //                 user.email
-    //             )
-    //         })
 
-    //     } catch (error: any) {
-    //         throw new Error("Error show users list");
-    //     }
-    // }
-
-    // async delete(user: User): Promise<void> {
-    //     try {
-    //         const filter = { _id: new ObjectId(user.id.value) };
-    //         await this.collection!.updateOne(filter, {
-    //             $set: {
-    //                 deletedAt: user.deletedAt
-    //             }
-    //         });
-    //     } catch (error) {
-    //         throw new Error("Error delete users list");
-    //     }
-    // }

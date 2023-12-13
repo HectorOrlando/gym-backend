@@ -65,6 +65,7 @@ export class User {
     // Método para marcar el usuario como eliminado
     public delete(): void {
         this._isDeleted = true;
+        this.updateUpdatedAt();
     }
 
     // Métodos para actualizar el nombre, correo electrónico y contraseña del usuario

@@ -14,6 +14,6 @@ export class UserDelete {
 
         // user.delete();
 
-        // await this.repository.delete(user);
+        await this.repository.delete(id);
     }
 }
