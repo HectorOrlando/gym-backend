@@ -1,6 +1,7 @@
 // src\core\user\application\UserDelete.ts
 
 import { User } from "../domain/User";
+import { UserId } from "../domain/UserId";
 import { UserRepository } from "../domain/UserRepository";
 
 export class UserDelete {
@@ -9,6 +10,10 @@ export class UserDelete {
     }
 
     public async run(id: string): Promise<void> {
-        await this.repository.delete(id);
+        // const user: User = await this.repository.find(new UserId(id));
+
+        // user.delete();
+
+        // await this.repository.delete(user);
     }
 }

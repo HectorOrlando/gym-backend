@@ -10,32 +10,23 @@ import { userValidationMiddleware } from "../middlewares/userMiddlewares";
 // Creamos el enrutador para la entidad 'usuarios'
 export const userRouter = express.Router();
 
-
+// Define el tipo de la solicitud de registro de usuario
 type RegisterUserRequest = {
     name: string;
     email: string;
+    password: string;
 }
 
-// Definir la ruta GET /users en el enrutador userRouter
-userRouter.get("/users", async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        // Obtenemos todos los usuarios desde el controlador usando el caso de uso getAllUsers
-        const users = await userController.showUser();
-        return res.json({ users });
-    } catch (error) {
-        ErrorHandler.handleError(error, req, res, next);
-    }
-});
-
+// Ruta para manejar las solicitudes POST a "/user" (registro de usuario)
 userRouter.post("/user", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const body: RegisterUserRequest = req.body;
-        const { name, email } = body;
-        const userData = { name, email } 
-        await userController.registerUser(userData);
-        res.status(201).send('User create successfully').end();
+        const body: RegisterUserRequest = req.body; // Extrae los datos del cuerpo de la solicitud y valida el formato
+        const { name, email, password } = body;
+        const user = { name, email, password }; // Agrupa los datos del usuario
+        await userController.registerUser(user); // Llama al controlador para registrar al usuario utilizando los datos proporcionados
+        res.status(201).send('User created successfully').end(); // Responde con un código de estado 201 (Created) si el registro fue exitoso
     } catch (error) {
-        ErrorHandler.handleError(error, req, res, next);
+        ErrorHandler.handleError(error, req, res, next); // Maneja los errores utilizando la clase ErrorHandler y pasa el control al siguiente middleware
     }
 });
 
@@ -48,6 +39,17 @@ userRouter.delete("/user/:id", async (req: Request, res: Response, next: NextFun
         ErrorHandler.handleError(error, req, res, next);
     }
 });
+
+// Definir la ruta GET /users en el enrutador userRouter
+// userRouter.get("/users", async (req: Request, res: Response, next: NextFunction) => {
+//     try {
+//         // Obtenemos todos los usuarios desde el controlador usando el caso de uso getAllUsers
+//         const users = await userController.showUser();
+//         return res.json({ users });
+//     } catch (error) {
+//         ErrorHandler.handleError(error, req, res, next);
+//     }
+// });
 
 
 

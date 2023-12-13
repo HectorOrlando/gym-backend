@@ -8,11 +8,22 @@ import { User } from "../domain/User";
 import { UserRepository } from "../domain/UserRepository";
 import { UserId } from "../domain/UserId";
 
+// Define un tipo que representa la estructura de los datos almacenados en MongoDB para un usuario
+type UserPrimitives = {
+    _id: ObjectId;
+    name: string;
+    email: string;
+    password: string;
+    createdAt: Date;
+    isDeleted: boolean;
+    updatedAt: Date | undefined;
+};
+
 // Clase que implementa la interfaz UserRepository y se conecta a MongoDB
 export class MongoUserRepository implements UserRepository {
     // Propiedad privada que representa la colección de usuarios en la base de datos
-    private collection?: Collection;
-
+    private collection!: Collection<UserPrimitives>;
+    // Constructor que establece la conexión con la base de datos al instanciar la clase
     constructor() { this.connect(); }
 
     //  Establece la conexión con la base de datos.
@@ -24,35 +35,57 @@ export class MongoUserRepository implements UserRepository {
         }
     }
 
+    // Implementación del método de registro de un usuario en la base de datos MongoDB
     async register(user: User): Promise<void> {
         try {
+            // Convierte los datos del usuario de dominio a la estructura de datos de MongoDB
             const userToRegister = {
-                _id: new ObjectId(user.getIdValue()),
-                name: user.getName(),
-                email: user.getEmail(),
+                _id: new ObjectId(user.getIdValue()),   // Se asigna un nuevo ObjectId basado en el ID del usuario de dominio
+                name: user.name,
+                email: user.email,
+                password: user.password,
+                createdAt: user.createdAt,
+                isDeleted: user.isDeleted,
+                updatedAt: user.updatedAt
             };
+            // Inserta el usuario en la colección de MongoDB
             await this.collection!.insertOne(userToRegister);
         } catch (error) {
             throw new Error("Error insert user.");
         }
     }
 
-    async show(): Promise<WithId<Document>[]> {
-        try {
-            return await this.collection!.find().toArray();
-        } catch (error: any) {
-            throw new Error("Error show users list");
-        }
-    }
+    // async show(): Promise<User[]> {
+    //     try {
+    //         // Aquí viene los datos de la DB
+    //         const usersFound = await this.collection.find().toArray();
 
-    async delete(id: string): Promise<void> {
-        try {
-            const filter = { _id: new ObjectId(id) };
-            await this.collection!.deleteOne(filter);
-        } catch (error) {
-            throw new Error("Error delete users list");
-        }
-    }
+    //         // Aquí mapeamos los datos que vienen de mongo a nuestro User de dominio
+    //         return usersFound.map(user => {
+    //             return new User(
+    //                 new UserId(user._id.toHexString()),
+    //                 user.name,
+    //                 user.email
+    //             )
+    //         })
+
+    //     } catch (error: any) {
+    //         throw new Error("Error show users list");
+    //     }
+    // }
+
+    // async delete(user: User): Promise<void> {
+    //     try {
+    //         const filter = { _id: new ObjectId(user.id.value) };
+    //         await this.collection!.updateOne(filter, {
+    //             $set: {
+    //                 deletedAt: user.deletedAt
+    //             }
+    //         });
+    //     } catch (error) {
+    //         throw new Error("Error delete users list");
+    //     }
+    // }
 
 
 }
