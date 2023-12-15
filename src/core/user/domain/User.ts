@@ -19,18 +19,18 @@ export class User {
     public constructor(
         id: UserId,
         name: string,
-        email: string,
-        password: string,
-        createdAt: Date,
-        updatedAt: Date | undefined,
-        isDeleted: boolean,
+        email: UserEmail,
+        password: UserPassword,
+        createdAt?: Date,
+        updatedAt?: Date | undefined,
+        isDeleted = false,
     ) {
         // Inicialización de propiedades
         this._id = id;
         this._name = this.validateName(name);
-        this._email = new UserEmail(email);
-        this._password = new UserPassword(password);
-        this._createdAt = createdAt;
+        this._email = email;
+        this._password = password;
+        this._createdAt = createdAt || new Date();
         this._updatedAt = updatedAt;
         this._isDeleted = isDeleted;
     }
@@ -105,11 +105,9 @@ export class User {
     }
 
     // Método estático de la fábrica para registrar un nuevo usuario
-    public static register(name: string, email: string, password: string): User {
+    // Named constructor -> constructor semántico
+    public static register(name: string, email: UserEmail, password: UserPassword): User {
         const id = UserId.random();
-        const createdAt = new Date();
-        const updateAt = undefined;
-        const isDeleted = false;
-        return new User(id, name, email, password, createdAt, updateAt, isDeleted);
+        return new User(id, name, email, password);
     }
 }
