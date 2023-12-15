@@ -7,6 +7,8 @@ import { dbConnection } from "../../shared/infrastructure/mongodb/connections/Co
 import { User } from "../domain/User";
 import { UserRepository } from "../domain/UserRepository";
 import { UserId } from "../domain/UserId";
+import { Email } from "../domain/Email";
+import { Password } from "../domain/Password";
 
 // Define un tipo que representa la estructura de los datos almacenados en MongoDB para un usuario
 type UserPrimitives = {
@@ -63,8 +65,8 @@ export class MongoUserRepository implements UserRepository {
                 return new User(
                     new UserId(user._id.toHexString()),
                     user.name,
-                    user.email,
-                    user.password,
+                    new Email(user.email),
+                    new Password(user.password),
                     user.createdAt,
                     user.updatedAt,
                     user.isDeleted
@@ -87,8 +89,8 @@ export class MongoUserRepository implements UserRepository {
             const userInstance = new User(
                 new UserId(user._id.toHexString()),
                 user.name,
-                user.email,
-                user.password,
+                new Email(user.email),
+                new Password(user.password),
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -122,8 +124,8 @@ export class MongoUserRepository implements UserRepository {
             return new User(
                 new UserId(user._id.toHexString()),
                 user.name,
-                user.email,
-                user.password,
+                new Email(user.email),
+                new Password(user.password),
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -146,8 +148,8 @@ export class MongoUserRepository implements UserRepository {
             const updatedUser: User = new User(
                 new UserId(user._id.toHexString()),
                 name || user.name, // Si name es null o undefined, mantiene el valor existente
-                email || user.email, // Si email es null o undefined, mantiene el valor existente
-                password || user.password,
+                new Email(email || user.email), // Si email es null o undefined, mantiene el valor existente
+                new Password(password || user.password),
                 user.createdAt,
                 new Date(), // Actualiza updatedAt con la fecha actual
                 user.isDeleted
