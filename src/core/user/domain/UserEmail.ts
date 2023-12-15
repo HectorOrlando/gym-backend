@@ -1,7 +1,7 @@
-// src\core\user\domain\Email.ts
+// src\core\user\domain\UserEmail.ts
 
 // Definición de la clase Email que representa un objeto de valor `Value Object` para direcciones de correo electrónico
-export class Email {
+export class UserEmail {
     // Propiedad privada que almacena el valor del correo electrónico
     private readonly _value: string;
 
@@ -26,7 +26,7 @@ export class Email {
     }
 
     // Método para comparar dos objetos Email y determinar si tienen el mismo valor
-    equals(email: Email): boolean {
+    equals(email: UserEmail): boolean {
         return this._value === email.value;
     }
 }

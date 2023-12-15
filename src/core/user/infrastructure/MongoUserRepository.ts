@@ -7,8 +7,8 @@ import { dbConnection } from "../../shared/infrastructure/mongodb/connections/Co
 import { User } from "../domain/User";
 import { UserRepository } from "../domain/UserRepository";
 import { UserId } from "../domain/UserId";
-import { Email } from "../domain/Email";
-import { Password } from "../domain/Password";
+import { UserEmail } from "../domain/UserEmail";
+import { UserPassword } from "../domain/UserPassword";
 
 // Define un tipo que representa la estructura de los datos almacenados en MongoDB para un usuario
 type UserPrimitives = {
@@ -65,8 +65,8 @@ export class MongoUserRepository implements UserRepository {
                 return new User(
                     new UserId(user._id.toHexString()),
                     user.name,
-                    new Email(user.email),
-                    new Password(user.password),
+                    new UserEmail(user.email),
+                    new UserPassword(user.password),
                     user.createdAt,
                     user.updatedAt,
                     user.isDeleted
@@ -89,8 +89,8 @@ export class MongoUserRepository implements UserRepository {
             const userInstance = new User(
                 new UserId(user._id.toHexString()),
                 user.name,
-                new Email(user.email),
-                new Password(user.password),
+                new UserEmail(user.email),
+                new UserPassword(user.password),
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -124,8 +124,8 @@ export class MongoUserRepository implements UserRepository {
             return new User(
                 new UserId(user._id.toHexString()),
                 user.name,
-                new Email(user.email),
-                new Password(user.password),
+                new UserEmail(user.email),
+                new UserPassword(user.password),
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -148,8 +148,8 @@ export class MongoUserRepository implements UserRepository {
             const updatedUser: User = new User(
                 new UserId(user._id.toHexString()),
                 name || user.name, // Si name es null o undefined, mantiene el valor existente
-                new Email(email || user.email), // Si email es null o undefined, mantiene el valor existente
-                new Password(password || user.password),
+                new UserEmail(email || user.email), // Si email es null o undefined, mantiene el valor existente
+                new UserPassword(password || user.password),
                 user.createdAt,
                 new Date(), // Actualiza updatedAt con la fecha actual
                 user.isDeleted

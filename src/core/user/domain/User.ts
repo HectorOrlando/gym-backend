@@ -1,7 +1,7 @@
 // src\core\user\domain\User.ts
 
-import { Email } from "./Email";
-import { Password } from "./Password";
+import { UserEmail } from "./UserEmail";
+import { UserPassword } from "./UserPassword";
 import { UserId } from "./UserId";
 
 // Definición de la clase User
@@ -9,8 +9,8 @@ export class User {
     // Propiedades privadas
     private readonly _id: UserId;
     private _name: string;
-    private _email: Email;
-    private _password: Password;
+    private _email: UserEmail;
+    private _password: UserPassword;
     private readonly _createdAt: Date;
     private _updatedAt: Date | undefined;
     private _isDeleted: boolean;
@@ -19,8 +19,8 @@ export class User {
     public constructor(
         id: UserId,
         name: string,
-        email: Email,
-        password: Password,
+        email: UserEmail,
+        password: UserPassword,
         createdAt: Date,
         updatedAt: Date | undefined,
         isDeleted: boolean,
@@ -77,12 +77,12 @@ export class User {
     }
 
     public updateEmail(email: string): void {
-        this._email = new Email(email);
+        this._email = new UserEmail(email);
         this.updateUpdatedAt();
     }
 
     public updatePassword(password: string): void {
-        this._password = new Password(password);
+        this._password = new UserPassword(password);
         this.updateUpdatedAt();
     }
 
@@ -110,6 +110,6 @@ export class User {
         const createdAt = new Date();
         const updateAt = undefined;
         const isDeleted = false;
-        return new User(id, name, new Email(email), new Password(password), createdAt, updateAt, isDeleted);
+        return new User(id, name, new UserEmail(email), new UserPassword(password), createdAt, updateAt, isDeleted);
     }
 }

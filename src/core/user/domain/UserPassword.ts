@@ -1,6 +1,6 @@
-// src\core\user\domain\Password.ts
+// src\core\user\domain\UserPassword.ts
 
-export class Password {
+export class UserPassword {
     private readonly _value: string;
 
     constructor(value: string) {
