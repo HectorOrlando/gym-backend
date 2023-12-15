@@ -44,12 +44,12 @@ export class User {
         return this._name;
     }
 
-    public get email(): string {
-        return this._email.value;
+    public get email(): UserEmail {
+        return this._email;
     }
 
-    public get password(): string {
-        return this._password.value;
+    public get password(): UserPassword {
+        return this._password;
     }
 
     public get createdAt(): Date {
@@ -76,8 +76,8 @@ export class User {
         this.updateUpdatedAt();
     }
 
-    public updateEmail(email: string): void {
-        this._email = new UserEmail(email);
+    public updateEmail(email: UserEmail): void {
+        this._email = email;
         this.updateUpdatedAt();
     }
 

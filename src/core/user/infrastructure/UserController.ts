@@ -48,8 +48,8 @@ export class UserController {
             return {
                 id: user.id.value,
                 name: user.name,
-                email: user.email,
-                password: user.password,
+                email: user.email.value,
+                password: user.password.value,
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt,
                 isDeleted: user.isDeleted,
@@ -63,8 +63,8 @@ export class UserController {
         return {
             id: user.id.value,
             name: user.name,
-            email: user.email,
-            password: user.password,
+            email: user.email.value,
+            password: user.password.value,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
             isDeleted: user.isDeleted,

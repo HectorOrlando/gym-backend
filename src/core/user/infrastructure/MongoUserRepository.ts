@@ -39,27 +39,25 @@ export class MongoUserRepository implements UserRepository {
 
     // Implementación del método de registro de un usuario en la base de datos MongoDB
     async register(user: User): Promise<void> {
-        try {
-            // Convierte los datos del usuario de dominio a la estructura de datos de MongoDB
-            const userToRegister = {
-                _id: new ObjectId(user.getIdValue()),   // Se asigna un nuevo ObjectId basado en el ID del usuario de dominio
-                name: user.name,
-                email: user.email,
-                password: user.password,
-                createdAt: user.createdAt,
-                updatedAt: user.updatedAt,
-                isDeleted: user.isDeleted,
-            };
-            // Inserta el usuario en la colección de MongoDB
-            await this.collection!.insertOne(userToRegister);
-        } catch (error) {
-            throw new Error("Error insert user.");
-        }
+        // Convierte los datos del usuario de dominio a la estructura de datos de MongoDB
+        const userToRegister = {
+            _id: new ObjectId(user.id.value),   // Se asigna un nuevo ObjectId basado en el ID del usuario de dominio
+            name: user.name,
+            email: user.email.value,
+            password: user.password.value,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+            isDeleted: user.isDeleted,
+        };
+        // Inserta el usuario en la colección de MongoDB
+        await this.collection!.insertOne(userToRegister);
     }
 
     async findAll(): Promise<User[]> {
         try {
-            const usersFound = await this.collection.find().toArray();
+            const usersFound = await this.collection.find({
+                isDeleted: false 
+            }).toArray();
 
             return usersFound.map(user => {
                 return new User(
@@ -78,45 +76,22 @@ export class MongoUserRepository implements UserRepository {
         }
     }
 
-    async delete(userId: string): Promise<void> {
-        try {
-            const _id = new ObjectId(userId);
-            const user = await this.collection.findOne(_id);
-            if (!user) {
-                throw new Error('El id de usuario no existe');
+    // borrado logico
+    async delete(user: User): Promise<void> {
+        await this.collection.updateOne({ _id: new ObjectId(user.id.value) }, {
+            $set: {
+                isDeleted: user.isDeleted
             }
-
-            const userInstance = new User(
-                new UserId(user._id.toHexString()),
-                user.name,
-                new UserEmail(user.email),
-                new UserPassword(user.password),
-                user.createdAt,
-                user.updatedAt,
-                user.isDeleted
-            );
-
-            userInstance.delete();
-
-            await this.collection.updateOne(
-                { _id },
-                {
-                    $set: {
-                        isDeleted: userInstance.isDeleted,
-                        updatedAt: userInstance.updatedAt,
-                    }
-                }
-            );
-
-        } catch (error) {
-            throw new Error("Error al borrar el usuario.");
-        }
+        });
     }
 
-    async findById(userId: string): Promise<User> {
+    async findById(userId: UserId): Promise<User> {
         try {
-            const _id = new ObjectId(userId);
-            const user = await this.collection.findOne({ _id });
+
+            const user = await this.collection.findOne({ 
+                _id: new ObjectId(userId.value),
+                isDeleted: false 
+            });
             if (!user) {
                 throw new Error('El id de usuario no existe.');
             }
@@ -125,7 +100,7 @@ export class MongoUserRepository implements UserRepository {
                 new UserId(user._id.toHexString()),
                 user.name,
                 new UserEmail(user.email),
-                    new UserPassword(user.password),
+                new UserPassword(user.password),
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -136,39 +111,19 @@ export class MongoUserRepository implements UserRepository {
         }
     }
 
-    async update(userId: string, name: string, email: string, password: string): Promise<void> {
-        try {
-            const _id = new ObjectId(userId);
-            const user = await this.collection.findOne({ _id });
-
-            if (!user) {
-                throw new Error('El id de usuario no existe.');
-            }
-
-            const updatedUser: User = new User(
-                new UserId(user._id.toHexString()),
-                name || user.name, // Si name es null o undefined, mantiene el valor existente
-                new UserEmail(user.email), // Si email es null o undefined, mantiene el valor existente
-                new UserPassword(user.password),
-                user.createdAt,
-                new Date(), // Actualiza updatedAt con la fecha actual
-                user.isDeleted
-            );
-
-            await this.collection.updateOne(
-                { _id },
-                {
-                    $set: {
-                        name: updatedUser.name,
-                        email: updatedUser.email,
-                        password: updatedUser.password,
-                        updatedAt: updatedUser.updatedAt,
-                    }
+    async update(user: User): Promise<void> {
+        await this.collection.updateOne(
+            { _id: new ObjectId(user.id.value) },
+            {
+                $set: {
+                    name: user.name,
+                    email: user.email.value,
+                    password: user.password.value,
+                    updatedAt: user.updatedAt,
                 }
-            );
+            }
+        );
 
-        } catch (error) {
-            throw new Error("Error al actualizar el usuario por id.");
-        }
+
     }
 }

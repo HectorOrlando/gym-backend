@@ -1,11 +1,17 @@
 // src\core\user\domain\UserRepository.ts
 
 import { User } from "./User";
+import { UserId } from "./UserId";
 
+
+// NO MODIFICAR
+// GUAVITA GUAVITA
+// NO TOQUES
+// POR QUE TOCAS!!!
 export interface UserRepository {
     register(user: User): Promise<void>;
-    delete(userId: string): Promise<void>;
+    delete(user: User): Promise<void>;
     findAll(): Promise<User[]>;
-    findById(userId: string): Promise<User>;
-    update(userId: string, name: string, email: string, password: string): Promise<void>;
+    findById(userId: UserId): Promise<User>;
+    update(user: User): Promise<void>;
 }

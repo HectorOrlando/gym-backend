@@ -5,15 +5,13 @@ import { UserId } from "../domain/UserId";
 import { UserRepository } from "../domain/UserRepository";
 
 export class UserDelete {
-    public constructor(private readonly repository: UserRepository) {
-        this.repository = repository;
-    }
+    public constructor(private readonly repository: UserRepository) { }
 
     public async run(id: string): Promise<void> {
-        // const user: User = await this.repository.find(new UserId(id));
+        const user: User = await this.repository.findById(new UserId(id));
 
-        // user.delete();
+        user.delete();
 
-        await this.repository.delete(id);
+        await this.repository.delete(user);
     }
 }

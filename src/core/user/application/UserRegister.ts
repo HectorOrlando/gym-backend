@@ -16,9 +16,7 @@ type Request = {
 // Clase que representa el caso de uso de registro de usuario
 export class UserRegister {
     // Constructor que recibe una instancia de UserRepository a través de la inyección de dependencias
-    public constructor(private readonly repository: UserRepository) {
-        this.repository = repository;
-    }
+    public constructor(private readonly repository: UserRepository) {}
 
     // Método que ejecuta el caso de uso de registro de usuario
     public async run(request: Request): Promise<void> {
