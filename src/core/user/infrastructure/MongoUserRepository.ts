@@ -65,8 +65,8 @@ export class MongoUserRepository implements UserRepository {
                 return new User(
                     new UserId(user._id.toHexString()),
                     user.name,
-                    new UserEmail(user.email),
-                    new UserPassword(user.password),
+                    user.email,
+                    user.password,
                     user.createdAt,
                     user.updatedAt,
                     user.isDeleted
@@ -89,8 +89,8 @@ export class MongoUserRepository implements UserRepository {
             const userInstance = new User(
                 new UserId(user._id.toHexString()),
                 user.name,
-                new UserEmail(user.email),
-                new UserPassword(user.password),
+                user.email,
+                user.password,
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -124,8 +124,8 @@ export class MongoUserRepository implements UserRepository {
             return new User(
                 new UserId(user._id.toHexString()),
                 user.name,
-                new UserEmail(user.email),
-                new UserPassword(user.password),
+                user.email,
+                user.password,
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -148,8 +148,8 @@ export class MongoUserRepository implements UserRepository {
             const updatedUser: User = new User(
                 new UserId(user._id.toHexString()),
                 name || user.name, // Si name es null o undefined, mantiene el valor existente
-                new UserEmail(email || user.email), // Si email es null o undefined, mantiene el valor existente
-                new UserPassword(password || user.password),
+                email || user.email, // Si email es null o undefined, mantiene el valor existente
+                password || user.password,
                 user.createdAt,
                 new Date(), // Actualiza updatedAt con la fecha actual
                 user.isDeleted

@@ -19,8 +19,8 @@ export class User {
     public constructor(
         id: UserId,
         name: string,
-        email: UserEmail,
-        password: UserPassword,
+        email: string,
+        password: string,
         createdAt: Date,
         updatedAt: Date | undefined,
         isDeleted: boolean,
@@ -28,8 +28,8 @@ export class User {
         // Inicialización de propiedades
         this._id = id;
         this._name = this.validateName(name);
-        this._email = email;
-        this._password = password;
+        this._email = new UserEmail(email);
+        this._password = new UserPassword(password);
         this._createdAt = createdAt;
         this._updatedAt = updatedAt;
         this._isDeleted = isDeleted;
@@ -110,6 +110,6 @@ export class User {
         const createdAt = new Date();
         const updateAt = undefined;
         const isDeleted = false;
-        return new User(id, name, new UserEmail(email), new UserPassword(password), createdAt, updateAt, isDeleted);
+        return new User(id, name, email, password, createdAt, updateAt, isDeleted);
     }
 }
