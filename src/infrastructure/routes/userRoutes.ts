@@ -62,9 +62,8 @@ userRouter.get("/users/:id", async (req: Request, res: Response, next: NextFunct
 userRouter.put("/users/:id", userValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
-        const body: RegisterUserRequest = req.body;
-        const {name, email, password} = body;
-        await userController.updateByIdUser(id, name, email, password);
+        const body = req.body;
+        await userController.updateByIdUser(id, body);
         res.status(204).header('X-Message', 'User update successfully').end();
     } catch (error) {
         ErrorHandler.handleError(error, req, res, next);

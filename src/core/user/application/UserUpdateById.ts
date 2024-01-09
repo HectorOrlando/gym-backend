@@ -1,11 +1,24 @@
 import { User } from "../domain/User";
+import { UserEmail } from "../domain/UserEmail";
+import { UserId } from "../domain/UserId";
+import { UserPassword } from "../domain/UserPassword";
 import { UserRepository } from "../domain/UserRepository";
 
-export class UserUpdateById {
-    public constructor(private readonly repository: UserRepository) {}
-
-    public async run(userId: string, name: string, email: string, password: string): Promise<void> {
-        // @ts-ignore
-        await this.repository.update(userId, name, email, password);
-    }
+// Define un tipo para la solicitud de actualización de usuario por ID
+type Request = {
+    name: string;
+    email: string;
+    password: string;
 }
+
+export class UserUpdateById {
+    public constructor(private readonly repository: UserRepository) { }
+
+    public async run(id: string, request: Request): Promise<void> {
+        const user: User = await this.repository.findById(new UserId(id));
+        user.updateName(request.name);
+        user.updateEmail(new UserEmail(request.email));
+        user.updatePassword(request.password);
+        await this.repository.update(user);
+    }
+}                        

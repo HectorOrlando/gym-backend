@@ -6,8 +6,8 @@ import { UserId } from "./UserId";
 
 // Definición de la clase User
 export class User {
-    // Propiedades privadas
-    private readonly _id: UserId;
+    // Propiedades privadas, tambíen se diferencian con el  guión bajo _id, _name
+    private readonly _id: UserId;   // reandoly propiedad de solo lectura.
     private _name: string;
     private _email: UserEmail;
     private _password: UserPassword;

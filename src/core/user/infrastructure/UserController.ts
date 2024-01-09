@@ -4,6 +4,12 @@ import { WithId, Document } from "mongodb";
 import { UserDelete, UserRegister, UserFindAll, UserFindById, UserUpdateById } from "../application";
 import { User } from "../domain/User";
 
+type Request = {
+    userId: string;
+    name: string;
+    email: string;
+    password: string;
+}
 
 type RegisterUserRequest = {
     name: string;
@@ -71,7 +77,8 @@ export class UserController {
         }
     }
 
-    async updateByIdUser(userId: string, name: string, email: string, password: string): Promise<void> {
-        await this.update.run(userId, name, email, password);
+    async updateByIdUser(id: string, request: Request): Promise<void> {
+        await this.update.run(id, request);
     }
+
 }
