@@ -1,7 +1,6 @@
 // src\core\user\domain\User.ts
 
 import { UserEmail } from "./UserEmail";
-import { UserPassword } from "./UserPassword";
 import { UserId } from "./UserId";
 
 // Definición de la clase User
@@ -10,7 +9,7 @@ export class User {
     private readonly _id: UserId;   // reandoly propiedad de solo lectura.
     private _name: string;
     private _email: UserEmail;
-    private _password: UserPassword;
+    private _password: string;
     private readonly _createdAt: Date;
     private _updatedAt: Date | undefined;
     private _isDeleted: boolean;
@@ -20,7 +19,7 @@ export class User {
         id: UserId,
         name: string,
         email: UserEmail,
-        password: UserPassword,
+        password: string,
         createdAt?: Date,
         updatedAt?: Date | undefined,
         isDeleted = false,
@@ -48,7 +47,7 @@ export class User {
         return this._email;
     }
 
-    public get password(): UserPassword {
+    public get password(): string {
         return this._password;
     }
 
@@ -82,7 +81,7 @@ export class User {
     }
 
     public updatePassword(password: string): void {
-        this._password = new UserPassword(password);
+        this._password = password;
         this.updateUpdatedAt();
     }
 
@@ -106,7 +105,7 @@ export class User {
 
     // Método estático de la fábrica para registrar un nuevo usuario
     // Named constructor -> constructor semántico
-    public static register(name: string, email: UserEmail, password: UserPassword): User {
+    public static register(name: string, email: UserEmail, password: string): User {
         const id = UserId.random();
         return new User(id, name, email, password);
     }

@@ -1,7 +1,6 @@
 import { User } from "../domain/User";
 import { UserEmail } from "../domain/UserEmail";
 import { UserId } from "../domain/UserId";
-import { UserPassword } from "../domain/UserPassword";
 import { UserRepository } from "../domain/UserRepository";
 
 // Define un tipo para la solicitud de actualización de usuario por ID

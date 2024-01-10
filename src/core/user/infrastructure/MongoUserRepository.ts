@@ -8,7 +8,6 @@ import { User } from "../domain/User";
 import { UserRepository } from "../domain/UserRepository";
 import { UserId } from "../domain/UserId";
 import { UserEmail } from "../domain/UserEmail";
-import { UserPassword } from "../domain/UserPassword";
 
 // Define un tipo que representa la estructura de los datos almacenados en MongoDB para un usuario
 type UserPrimitives = {
@@ -44,7 +43,7 @@ export class MongoUserRepository implements UserRepository {
             _id: new ObjectId(user.id.value),   // Se asigna un nuevo ObjectId basado en el ID del usuario de dominio
             name: user.name,
             email: user.email.value,
-            password: user.password.value,
+            password: user.password,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
             isDeleted: user.isDeleted,
@@ -64,7 +63,7 @@ export class MongoUserRepository implements UserRepository {
                     new UserId(user._id.toHexString()),
                     user.name,
                     new UserEmail(user.email),
-                    new UserPassword(user.password),
+                    user.password,
                     user.createdAt,
                     user.updatedAt,
                     user.isDeleted
@@ -100,7 +99,7 @@ export class MongoUserRepository implements UserRepository {
                 new UserId(user._id.toHexString()),
                 user.name,
                 new UserEmail(user.email),
-                new UserPassword(user.password),
+                user.password,
                 user.createdAt,
                 user.updatedAt,
                 user.isDeleted
@@ -118,7 +117,7 @@ export class MongoUserRepository implements UserRepository {
                 $set: {
                     name: user.name,
                     email: user.email.value,
-                    password: user.password.value,
+                    password: user.password,
                     updatedAt: user.updatedAt,
                 }
             }
