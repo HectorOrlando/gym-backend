@@ -14,15 +14,10 @@ type Request = {
 
 // Clase que representa el caso de uso de registro de usuario
 export class UserRegister {
-    // Constructor que recibe una instancia de UserRepository a través de la inyección de dependencias
-    public constructor(private readonly repository: UserRepository) {}
+    public constructor(private readonly repository: UserRepository) {}  // Constructor que recibe una instancia de UserRepository a través de la inyección de dependencias
 
-    // Método que ejecuta el caso de uso de registro de usuario
-    public async run(request: Request): Promise<void> {
-        // Crea un nuevo usuario utilizando el método estático de la clase User register()
-        const user = User.register(request.name, new UserEmail(request.email), request.password);
-
-        // Llama al método de registro en el repositorio de usuario, almacenando el usuario en el sistema
-        await this.repository.register(user);
+    public async run(request: Request): Promise<void> { // Método que ejecuta el caso de uso de registro de usuario
+        const user = User.register(request.name, new UserEmail(request.email), request.password);   // Crea un nuevo usuario utilizando el método estático de la clase User register()
+        await this.repository.register(user);   // Llama al método de registro en el repositorio de usuario, almacenando el usuario en el sistema
     }
 }

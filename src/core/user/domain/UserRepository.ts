@@ -3,11 +3,7 @@
 import { User } from "./User";
 import { UserId } from "./UserId";
 
-
-// NO MODIFICAR
-// GUAVITA GUAVITA
-// NO TOQUES
-// POR QUE TOCAS!!!
+/******* NO MODIFICAR  *********/
 export interface UserRepository {
     register(user: User): Promise<void>;
     delete(user: User): Promise<void>;

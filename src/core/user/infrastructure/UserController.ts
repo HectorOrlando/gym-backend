@@ -1,8 +1,6 @@
 // src\core\user\infrastructure\UserController.ts
 
-import { WithId, Document } from "mongodb";
 import { UserDelete, UserRegister, UserFindAll, UserFindById, UserUpdateById } from "../application";
-import { User } from "../domain/User";
 
 type Request = {
     userId: string;
@@ -29,7 +27,7 @@ type UserResponse = {
 
 // Clase que representa el controlador de usuarios
 export class UserController {
-    // Constructor que recibe una instancia de FindAllUsers como parámetro
+    
     constructor(
         public register: UserRegister,
         public deleteUser: UserDelete,

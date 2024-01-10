@@ -1,7 +1,7 @@
 // src\core\user\infrastructure\MongoUserRepository.ts
 
 // Importa las interfaces y tipos necesarios de MongoDB y la función de conexión a la base de datos
-import { Collection, WithId, Document, ObjectId } from "mongodb";
+import { Collection, ObjectId } from "mongodb";
 import { dbConnection } from "../../shared/infrastructure/mongodb/connections/Connection";
 
 import { User } from "../domain/User";
@@ -55,7 +55,7 @@ export class MongoUserRepository implements UserRepository {
     async findAll(): Promise<User[]> {
         try {
             const usersFound = await this.collection.find({
-                isDeleted: false 
+                isDeleted: false
             }).toArray();
 
             return usersFound.map(user => {
@@ -75,7 +75,7 @@ export class MongoUserRepository implements UserRepository {
         }
     }
 
-    // borrado logico
+    // borrado lógico
     async delete(user: User): Promise<void> {
         await this.collection.updateOne({ _id: new ObjectId(user.id.value) }, {
             $set: {
@@ -87,9 +87,9 @@ export class MongoUserRepository implements UserRepository {
     async findById(userId: UserId): Promise<User> {
         try {
 
-            const user = await this.collection.findOne({ 
+            const user = await this.collection.findOne({
                 _id: new ObjectId(userId.value),
-                isDeleted: false 
+                isDeleted: false
             });
             if (!user) {
                 throw new Error('El id de usuario no existe.');
@@ -122,7 +122,5 @@ export class MongoUserRepository implements UserRepository {
                 }
             }
         );
-
-
     }
 }

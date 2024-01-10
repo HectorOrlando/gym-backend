@@ -103,8 +103,7 @@ export class User {
         return name.trim();
     }
 
-    // Método estático de la fábrica para registrar un nuevo usuario
-    // Named constructor -> constructor semántico
+    // Método estático para registrar un nuevo usuario, `constructor semántico`
     public static register(name: string, email: UserEmail, password: string): User {
         const id = UserId.random();
         return new User(id, name, email, password);
