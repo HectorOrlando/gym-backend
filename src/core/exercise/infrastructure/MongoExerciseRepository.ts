@@ -134,4 +134,13 @@ export class MongoExerciseRepository implements ExerciseRepository {
             throw new Error("Error al actualizar el ejercicio.");
         }
     }
+
+    async delete(exercise: Exercise): Promise<void> {
+        await this.collection.updateOne(
+            {_id: new ObjectId(exercise.id.value)},
+            {$set: {
+                isDeleted: exercise.isDeleted
+            }}
+        )
+    }
 }

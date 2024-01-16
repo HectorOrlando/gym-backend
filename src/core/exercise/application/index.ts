@@ -4,3 +4,4 @@ export * from './ExerciseRegister';
 export * from './ExerciseFindAll';
 export * from './ExerciseFindById';
 export * from './ExerciseUpdateById';
+export * from './ExerciseDelete';

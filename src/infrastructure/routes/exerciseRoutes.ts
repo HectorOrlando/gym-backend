@@ -46,7 +46,7 @@ exerciseRouter.post('/exercises', exerciseValidationMiddleware, async (req: Requ
     }
 });
 
-exerciseRouter.put('/exercise/:id', exerciseValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
+exerciseRouter.put('/exercises/:id', exerciseValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
     try {
         await exerciseController.updateByIdExercise(req.params.id, req.body);
         res.status(204).header('X-Message', 'Exercise update successfully').end();
@@ -55,11 +55,11 @@ exerciseRouter.put('/exercise/:id', exerciseValidationMiddleware, async (req: Re
     }
 });
 
-// exerciseRouter.delete('/exercise/:id', async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         await exerciseController.removeExerciseById(req.params.id);
-//         res.status(204).header('X-Message', 'Exercise deleted successfully').end();
-//     } catch (error) {
-//         ErrorHandler.handleError(error, req, res, next);
-//     }
-// });
+exerciseRouter.delete('/exercises/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await exerciseController.deleteByIdExercise(req.params.id);
+        res.status(204).header('X-Message', 'Exercise deleted successfully').end();
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});

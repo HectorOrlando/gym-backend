@@ -8,4 +8,5 @@ export interface ExerciseRepository {
     findAll(): Promise<Exercise[]>;
     findById(id: ExerciseId): Promise<Exercise>;
     update(exercise: Exercise): Promise<void>;
+    delete(exercise: Exercise): Promise<void>;
 }
