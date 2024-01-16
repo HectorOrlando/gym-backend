@@ -1,3 +1,5 @@
+// src\infrastructure\routes\exerciseRoutes.ts
+
 import express, { NextFunction, Request, Response } from "express";
 // import { exerciseController } from "../dependency-injection/exerciseDependencies";
 import { exerciseController } from "../../core/exercise/infrastructure";
@@ -16,14 +18,14 @@ type RegisterExerciseRequest = {
 
 export const exerciseRouter = express.Router();
 
-// exerciseRouter.get('/exercises', async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         const exercises = await exerciseController.getAllExercises();
-//         res.json({ exercises });
-//     } catch (error) {
-//         ErrorHandler.handleError(error, req, res, next);
-//     }
-// });
+exerciseRouter.get('/exercises', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const exercises = await exerciseController.findAllExercises();
+        res.json({ exercises });
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});
 
 exerciseRouter.post('/exercises', exerciseValidationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
     try {
