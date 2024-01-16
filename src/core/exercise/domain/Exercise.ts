@@ -86,9 +86,6 @@ export class Exercise {
     }
 
     // Métodos para actualizar
-    public setUpdatedAt(): void {
-        this._updatedAt = new Date();
-    }
 
     public updateName(name: string): void {
         this._name = this.validateName(name);
@@ -120,6 +117,10 @@ export class Exercise {
         this.setUpdatedAt();
     }
 
+    private setUpdatedAt(): void {
+        this._updatedAt = new Date();
+    }
+    
     // Métodos para validar name y number
     private validateName(name: string): string {
         if (!name || name.trim().length < 2) {

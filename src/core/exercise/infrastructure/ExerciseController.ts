@@ -1,6 +1,6 @@
 // src\core\exercise\infrastructure\ExerciseController.ts
 
-import { ExerciseRegister, ExerciseFindAll, ExerciseFindById } from "../application";
+import { ExerciseRegister, ExerciseFindAll, ExerciseFindById, ExerciseUpdateById } from "../application";
 import { Exercise } from "../domain";
 
 // Definición de la estructura esperada para las solicitudes de registro de ejercicio
@@ -32,7 +32,8 @@ export class ExerciseController {
     constructor(
         public register: ExerciseRegister,
         public findAll: ExerciseFindAll,
-        public findById: ExerciseFindById
+        public findById: ExerciseFindById,
+        public updateById: ExerciseUpdateById
     ) { }
 
     // Método para registrar un nuevo ejercicio utilizando el caso de uso correspondiente
@@ -77,5 +78,9 @@ export class ExerciseController {
             updatedAt: exercise.updatedAt,
             isDeleted: exercise.isDeleted
         }
+    }
+
+    async updateByIdExercise(id: string, request: RegisterExerciseRequest): Promise<void>{
+        await this.updateById.run(id, request);
     }
 }

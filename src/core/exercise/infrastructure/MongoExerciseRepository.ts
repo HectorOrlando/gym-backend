@@ -113,4 +113,25 @@ export class MongoExerciseRepository implements ExerciseRepository {
             throw new Error("Error al obtener el ejercicios desde la base de datos.");
         }
     }
+
+    async update(exercise: Exercise): Promise<void> {
+        try {
+            await this.collection.updateOne(
+                { _id: new ObjectId(exercise.id.value) },
+                {
+                    $set: {
+                        name: exercise.name,
+                        typeOfExercise: exercise.typeOfExercise,
+                        series: exercise.series,
+                        repetitions: exercise.repetitions,
+                        rest: exercise.rest,
+                        weight: exercise.weight,
+                        updatedAt: exercise.updatedAt
+                    }
+                }
+            );
+        } catch (error) {
+            throw new Error("Error al actualizar el ejercicio.");
+        }
+    }
 }

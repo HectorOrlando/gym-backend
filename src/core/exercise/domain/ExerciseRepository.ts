@@ -7,4 +7,5 @@ export interface ExerciseRepository {
     register(exercise: Exercise): Promise<void>;
     findAll(): Promise<Exercise[]>;
     findById(id: ExerciseId): Promise<Exercise>;
+    update(exercise: Exercise): Promise<void>;
 }
