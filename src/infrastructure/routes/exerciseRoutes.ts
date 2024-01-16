@@ -1,11 +1,9 @@
 // src\infrastructure\routes\exerciseRoutes.ts
 
 import express, { NextFunction, Request, Response } from "express";
-// import { exerciseController } from "../dependency-injection/exerciseDependencies";
 import { exerciseController } from "../../core/exercise/infrastructure";
 import { exerciseValidationMiddleware } from '../middlewares/userMiddlewares';
 import { ErrorHandler } from "../error/ErrorHandler";
-
 
 type RegisterExerciseRequest = {
     name: string;
@@ -22,6 +20,15 @@ exerciseRouter.get('/exercises', async (req: Request, res: Response, next: NextF
     try {
         const exercises = await exerciseController.findAllExercises();
         res.json({ exercises });
+    } catch (error) {
+        ErrorHandler.handleError(error, req, res, next);
+    }
+});
+
+exerciseRouter.get('/exercises/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const exercise = await exerciseController.findByIdExercise(req.params.id);
+        res.json({ exercise });
     } catch (error) {
         ErrorHandler.handleError(error, req, res, next);
     }

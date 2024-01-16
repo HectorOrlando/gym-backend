@@ -2,3 +2,4 @@
 
 export * from './ExerciseRegister';
 export * from './ExerciseFindAll';
+export * from './ExerciseFindById';

@@ -1,6 +1,7 @@
 // src\core\exercise\infrastructure\ExerciseController.ts
 
-import { ExerciseRegister, ExerciseFindAll } from "../application";
+import { ExerciseRegister, ExerciseFindAll, ExerciseFindById } from "../application";
+import { Exercise } from "../domain";
 
 // Definición de la estructura esperada para las solicitudes de registro de ejercicio
 type RegisterExerciseRequest = {
@@ -30,7 +31,8 @@ type ExerciseResponse = {
 export class ExerciseController {
     constructor(
         public register: ExerciseRegister,
-        public findAll: ExerciseFindAll
+        public findAll: ExerciseFindAll,
+        public findById: ExerciseFindById
     ) { }
 
     // Método para registrar un nuevo ejercicio utilizando el caso de uso correspondiente
@@ -58,5 +60,22 @@ export class ExerciseController {
                 isDeleted: exercise.isDeleted
             }
         })
+    }
+
+    // Método para obtener el ejercicio y convertirlos a la estructura de respuesta definida
+    async findByIdExercise(id: string): Promise<ExerciseResponse> {
+        const exercise = await this.findById.run(id);
+        return {
+            id: exercise.id.value,
+            name: exercise.name,
+            typeOfExercise: exercise.typeOfExercise,
+            series: exercise.series,
+            repetitions: exercise.repetitions,
+            rest: exercise.rest,
+            weight: exercise.weight,
+            createdAt: exercise.createdAt,
+            updatedAt: exercise.updatedAt,
+            isDeleted: exercise.isDeleted
+        }
     }
 }

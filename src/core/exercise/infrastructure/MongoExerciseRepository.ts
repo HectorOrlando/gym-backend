@@ -87,4 +87,30 @@ export class MongoExerciseRepository implements ExerciseRepository {
             throw new Error("Error al obtener la lista de ejercicios desde la base de datos.");
         }
     }
+
+    async findById(exerciseId: ExerciseId): Promise<Exercise> {
+        try {
+            const exercise = await this.collection.findOne({
+                _id: new ObjectId(exerciseId.value),
+                isDeleted: false
+            });
+            if (!exercise) {
+                throw new Error('El id de exercise no existe.');
+            }
+            return new Exercise(
+                new ExerciseId(exercise._id.toHexString()),
+                exercise.name,
+                exercise.typeOfExercise,
+                exercise.series,
+                exercise.repetitions,
+                exercise.rest,
+                exercise.weight,
+                exercise.createdAt,
+                exercise.updatedAt,
+                exercise.isDeleted
+            );
+        } catch (error) {
+            throw new Error("Error al obtener el ejercicios desde la base de datos.");
+        }
+    }
 }
