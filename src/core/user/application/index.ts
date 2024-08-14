@@ -6,6 +6,3 @@ export * from './UserDelete';
 export * from './UserFindById';
 export * from './UserUpdateById';
 export * from './UserUpdateEmail';
-
-
-

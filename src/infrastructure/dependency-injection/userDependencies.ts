@@ -1,10 +1,15 @@
 // userDependencies.ts
 
-import { UserController } from "../controllers/UserController";
-import { MongoUserRepository } from "../repositories/MongoUserRepository";
+import { UserController } from '../controllers/UserController';
+import { MongoUserRepository } from '../repositories/MongoUserRepository';
 
-import { FindAllUsers, FindUserById, CreateUser, UpdateUserById, DeleteUserById } from "../../application/user-use-cases";
-
+import {
+  FindAllUsers,
+  FindUserById,
+  CreateUser,
+  UpdateUserById,
+  DeleteUserById,
+} from '../../application/user-use-cases';
 
 // Creamos una instancia de MongoUserRepository, que es una implementación de UserRepository.
 const userRepository = new MongoUserRepository();
@@ -18,9 +23,9 @@ export const deleteUserById = new DeleteUserById(userRepository);
 
 // Inyección de dependencias: Pasamos las instancias de los casos de uso como argumentos en la creación de la instancia de UserContoller.
 export const userController = new UserController(
-    findAllUsers,
-    findUserById,
-    createUser,
-    updateUserById,
-    deleteUserById
+  findAllUsers,
+  findUserById,
+  createUser,
+  updateUserById,
+  deleteUserById,
 );

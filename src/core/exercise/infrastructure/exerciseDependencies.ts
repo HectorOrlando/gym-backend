@@ -1,7 +1,13 @@
 // src\core\exercise\infrastructure\exerciseDependencies.ts
 
 import { ExerciseController, MongoExerciseRepository } from './';
-import { ExerciseRegister, ExerciseFindAll, ExerciseFindById, ExerciseUpdateById, ExerciseDelete } from '../application'
+import {
+  ExerciseRegister,
+  ExerciseFindAll,
+  ExerciseFindById,
+  ExerciseUpdateById,
+  ExerciseDelete,
+} from '../application';
 
 const exerciseRepository = new MongoExerciseRepository();
 
@@ -12,9 +18,9 @@ export const exerciseUpdateById = new ExerciseUpdateById(exerciseRepository);
 export const exerciseDelete = new ExerciseDelete(exerciseRepository);
 
 export const exerciseController = new ExerciseController(
-    exerciseRegister,
-    exerciseFindAll,
-    exerciseFindById,
-    exerciseUpdateById,
-    exerciseDelete
+  exerciseRegister,
+  exerciseFindAll,
+  exerciseFindById,
+  exerciseUpdateById,
+  exerciseDelete,
 );

@@ -17,13 +17,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/users",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"users"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "users"]
 						}
 					},
 					"response": []
@@ -35,14 +30,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/users/648cd5bf90a9f7b6ea9fd2f3",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"users",
-								"648cd5bf90a9f7b6ea9fd2f3"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "users", "648cd5bf90a9f7b6ea9fd2f3"]
 						}
 					},
 					"response": []
@@ -54,14 +43,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/users/64c144060bd7a6ab7e69fad8",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"users",
-								"64c144060bd7a6ab7e69fad8"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "users", "64c144060bd7a6ab7e69fad8"]
 						}
 					},
 					"response": []
@@ -82,14 +65,8 @@
 						},
 						"url": {
 							"raw": "{{url}}/gym/users/64c54d63d0e8edf43e2dade3",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"users",
-								"64c54d63d0e8edf43e2dade3"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "users", "64c54d63d0e8edf43e2dade3"]
 						}
 					},
 					"response": []
@@ -110,13 +87,8 @@
 						},
 						"url": {
 							"raw": "{{url}}/gym/users",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"users"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "users"]
 						}
 					},
 					"response": []
@@ -142,13 +114,8 @@
 						},
 						"url": {
 							"raw": "{{url}}/gym/exercises",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exercises"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exercises"]
 						}
 					},
 					"response": []
@@ -160,13 +127,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/exercises",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exercises"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exercises"]
 						}
 					},
 					"response": []
@@ -178,14 +140,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/exercises/64c7702d25a4de1983a6eaf5",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exercises",
-								"64c7702d25a4de1983a6eaf5"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exercises", "64c7702d25a4de1983a6eaf5"]
 						}
 					},
 					"response": []
@@ -197,14 +153,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/exercises/64c81cb994f794436139fb6c",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exercises",
-								"64c81cb994f794436139fb6c"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exercises", "64c81cb994f794436139fb6c"]
 						}
 					},
 					"response": []
@@ -225,14 +175,8 @@
 						},
 						"url": {
 							"raw": "{{url}}/gym/exercises/64c82321b38e03748d0bb7d2",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exercises",
-								"64c82321b38e03748d0bb7d2"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exercises", "64c82321b38e03748d0bb7d2"]
 						}
 					},
 					"response": []
@@ -258,13 +202,8 @@
 						},
 						"url": {
 							"raw": "{{url}}/gym/exerciseLog",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exerciseLog"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exerciseLog"]
 						}
 					},
 					"response": []
@@ -276,13 +215,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/exerciseLog",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exerciseLog"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exerciseLog"]
 						}
 					},
 					"response": []
@@ -294,14 +228,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{url}}/gym/exerciseLog/64d08f68c9cf9eaa5fc2234d",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"gym",
-								"exerciseLog",
-								"64d08f68c9cf9eaa5fc2234d"
-							]
+							"host": ["{{url}}"],
+							"path": ["gym", "exerciseLog", "64d08f68c9cf9eaa5fc2234d"]
 						}
 					},
 					"response": []

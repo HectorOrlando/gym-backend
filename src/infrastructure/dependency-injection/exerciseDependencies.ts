@@ -1,5 +1,5 @@
-import { ExerciseController } from "../controllers/ExerciseController";
-import { MongoExerciseRepository } from "../repositories/MongoExerciseRepository";
+import { ExerciseController } from '../controllers/ExerciseController';
+import { MongoExerciseRepository } from '../repositories/MongoExerciseRepository';
 
 import { FindAllExercises } from '../../application/exercise-use-cases/FindAllExercises';
 import { CreateExercise } from '../../application/exercise-use-cases/CreateExercise';
@@ -14,8 +14,8 @@ export const updateExerciseById = new UpdateExerciseById(exerciseRepository);
 export const deleteExerciseById = new DeleteExerciseById(exerciseRepository);
 
 export const exerciseController = new ExerciseController(
-    findAllExercises,
-    createExercise,
-    updateExerciseById,
-    deleteExerciseById
+  findAllExercises,
+  createExercise,
+  updateExerciseById,
+  deleteExerciseById,
 );

@@ -1,50 +1,50 @@
-import { Request } from "express";
-import { WithId, Document } from "mongodb";
+import { Request } from 'express';
+import { WithId, Document } from 'mongodb';
 
 import { FindAllExercises } from '../../application/exercise-use-cases/FindAllExercises';
-import { CreateExercise } from "../../application/exercise-use-cases/CreateExercise";
-import { UpdateExerciseById } from "../../application/exercise-use-cases/UpdateExerciseById";
+import { CreateExercise } from '../../application/exercise-use-cases/CreateExercise';
+import { UpdateExerciseById } from '../../application/exercise-use-cases/UpdateExerciseById';
 import { DeleteExerciseById } from '../../application/exercise-use-cases/DeleteExerciseById';
-import { ExerciseModel } from "../../domain/models/ExerciseModel";
+import { ExerciseModel } from '../../domain/models/ExerciseModel';
 
 export class ExerciseController {
-    constructor(
-        public findAllExercises: FindAllExercises,
-        public createExercise: CreateExercise,
-        public updateExerciseById: UpdateExerciseById,
-        public deleteExerciseById: DeleteExerciseById
-    ) { }
+  constructor(
+    public findAllExercises: FindAllExercises,
+    public createExercise: CreateExercise,
+    public updateExerciseById: UpdateExerciseById,
+    public deleteExerciseById: DeleteExerciseById,
+  ) {}
 
-    async getAllExercises(): Promise<WithId<Document>[]> {
-        try {
-            return await this.findAllExercises.run();
-        } catch (error) {
-            throw error;
-        }
+  async getAllExercises(): Promise<WithId<Document>[]> {
+    try {
+      return await this.findAllExercises.run();
+    } catch (error) {
+      throw error;
     }
+  }
 
-    async insertExercise(req: Request): Promise<void> {
-        try {
-            const exerciseData = req.body;
-            await this.createExercise.run(exerciseData);
-        } catch (error) {
-            throw error;
-        }
+  async insertExercise(req: Request): Promise<void> {
+    try {
+      const exerciseData = req.body;
+      await this.createExercise.run(exerciseData);
+    } catch (error) {
+      throw error;
     }
+  }
 
-    async putExerciseById(id: string, exercise: ExerciseModel): Promise<void> {
-        try {
-            await this.updateExerciseById.run(id, exercise);
-        } catch (error) {
-            throw error;
-        }
+  async putExerciseById(id: string, exercise: ExerciseModel): Promise<void> {
+    try {
+      await this.updateExerciseById.run(id, exercise);
+    } catch (error) {
+      throw error;
     }
+  }
 
-    async removeExerciseById(id: string): Promise<void> {
-        try {
-            await this.deleteExerciseById.run(id);
-        } catch (error) {
-            throw error;
-        }
+  async removeExerciseById(id: string): Promise<void> {
+    try {
+      await this.deleteExerciseById.run(id);
+    } catch (error) {
+      throw error;
     }
+  }
 }
