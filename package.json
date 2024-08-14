@@ -32,5 +32,10 @@
 		"@types/cors": "^2.8.17",
 		"husky": "^8.0.0",
 		"nodemon": "^3.1.4"
+	},
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
 	}
 }
