@@ -1,13 +1,15 @@
 {
-	"name": "skeleton-api-rest-full",
+	"name": "gym-api-backend",
 	"version": "1.0.0",
 	"description": "Añadir una description",
 	"main": "index.js",
 	"scripts": {
-		"start": "node dist/app.js",
-		"dev": "nodemon src/app.ts",
 		"build": "tsc",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "nodemon src/app.ts",
+		"lint": "eslint .",
+		"prepare": "husky install",
+		"start": "node dist/app.js",
+		"test": "echo \"No tests implemented yet\""
 	},
 	"keywords": [],
 	"author": "Hector Orlando",
@@ -24,7 +26,10 @@
 		"typescript": "^5.5.4"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^19.4.0",
+		"@commitlint/config-conventional": "^19.2.2",
 		"@types/cors": "^2.8.17",
+		"husky": "^8.0.0",
 		"nodemon": "^3.1.4"
 	}
 }
