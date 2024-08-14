@@ -1,0 +1,79 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"javascript": {
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		},
+		"formatter": {
+			"quoteStyle": "single",
+			"indentStyle": "space",
+			"trailingCommas": "all",
+			"arrowParentheses": "asNeeded",
+			"lineWidth": 90
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"a11y": {
+				"noAutofocus": "off",
+				"useKeyWithClickEvents": "off"
+			},
+			"complexity": {
+				"noBannedTypes": "off",
+				"noThisInStatic": "off",
+				"noStaticOnlyClass": "off",
+				"noUselessConstructor": "off",
+				"useOptionalChain": "off",
+				"noForEach": "warn",
+				"noExtraBooleanCast": "warn",
+				"useRegexLiterals": "warn",
+				"useFlatMap": "warn"
+			},
+			"correctness": {
+				"noSwitchDeclarations": "warn",
+				"noVoidTypeReturn": "warn",
+				"noUnsafeFinally": "warn",
+				"noUnusedVariables": "error",
+				"noInvalidUseBeforeDeclaration": "off",
+				"noUnusedImports": "error",
+				"useExhaustiveDependencies": "warn"
+			},
+			"nursery": {},
+			"suspicious": {
+				"noConstEnum": "off",
+				"noExplicitAny": "error",
+				"noEmptyInterface": "off",
+				"noDoubleEquals": "warn",
+				"noGlobalIsNan": "warn",
+				"noPrototypeBuiltins": "warn",
+				"noConfusingVoidType": "warn",
+				"noAssignInExpressions": "warn"
+			},
+			"style": {
+				"noUselessElse": "warn",
+				"useNamingConvention": {
+					"level": "off",
+					"options": {
+						"strictCase": false
+					}
+				},
+				"useTemplate": "warn",
+				"useDefaultParameterLast": "warn",
+				"useEnumInitializers": "warn",
+				"useImportType": "off"
+			},
+			"performance": {
+				"noDelete": "warn",
+				"noAccumulatingSpread": "warn"
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true
+	}
+}
