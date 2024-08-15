@@ -10,7 +10,7 @@
 		"build": "tsc",
 		"dev": "nodemon src/app.ts",
 		"lint": "eslint .",
-		"lint:src": "eslint src --ext .ts",
+		"lint:src": "eslint src",
 		"prepare": "husky install",
 		"start": "node dist/app.js",
 		"test": "echo \"No tests implemented yet\""
@@ -30,6 +30,9 @@
 		"@commitlint/cli": "^19.4.0",
 		"@commitlint/config-conventional": "^19.2.2",
 		"@types/cors": "^2.8.17",
+		"@typescript-eslint/eslint-plugin": "^8.1.0",
+		"@typescript-eslint/parser": "^8.1.0",
+		"eslint": "^9.9.0",
 		"husky": "^8.0.0",
 		"nodemon": "^3.1.4"
 	},
